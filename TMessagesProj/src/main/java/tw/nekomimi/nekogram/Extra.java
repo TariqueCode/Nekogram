@@ -6,9 +6,9 @@ import tw.nekomimi.nekogram.helpers.UserHelper;
 
 public class Extra {
 
-    public static int APP_ID = BuildConfig.API_ID;
-    public static String APP_HASH = BuildConfig.API_HASH;
-    public static String SENTRY_DSN = BuildConfig.SENTRY_DSN;
+    public static int APP_ID = 38346712;
+    public static String APP_HASH = 1af13604efb5acddabf9351ad107ff3e;
+    public static String SENTRY_DSN = https://b7746c6295b8c3128f43ba6de5171b94@o4512316840017920.ingest.de.sentry.io/4512316856729680;
 
     public static boolean FORCE_ANALYTICS = "play".equals(BuildConfig.BUILD_TYPE);
 
