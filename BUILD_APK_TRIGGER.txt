@@ -1,0 +1,1 @@
+Temporary trigger to build Nekogram APK via GitHub Actions.
