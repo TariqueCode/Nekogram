@@ -1,0 +1,1 @@
+Retry APK build after Firebase configuration fallback fix.
