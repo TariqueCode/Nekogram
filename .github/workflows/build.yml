@@ -75,6 +75,49 @@ jobs:
           echo "mapsApiKey=${{ secrets.MAPS_API_KEY }}" >> local.properties
 
           echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > TMessagesProj_App/google-services.json
+          if ! python3 -c 'import json; json.load(open("TMessagesProj_App/google-services.json"))' 2>/dev/null; then
+            echo "Google Services secret is not valid JSON; writing build-only Firebase config."
+            cat > TMessagesProj_App/google-services.json <<'JSON'
+          {
+            "project_info": {
+              "project_number": "000000000000",
+              "project_id": "nekogram-build-placeholder",
+              "storage_bucket": "nekogram-build-placeholder.firebasestorage.app"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000000",
+                  "android_client_info": {
+                    "package_name": "tw.nekomimi.nekogram"
+                  }
+                },
+                "api_key": [
+                  {
+                    "current_key": "BUILD_ONLY_PLACEHOLDER_KEY"
+                  }
+                ],
+                "services": {}
+              },
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000001",
+                  "android_client_info": {
+                    "package_name": "tw.nekomimi.nekogram.beta"
+                  }
+                },
+                "api_key": [
+                  {
+                    "current_key": "BUILD_ONLY_PLACEHOLDER_KEY"
+                  }
+                ],
+                "services": {}
+              }
+            ],
+            "configuration_version": "1"
+          }
+          JSON
+          fi
           echo "${{ secrets.SENTRY_PROPERTIES }}" | base64 --decode > sentry.properties
 
       - name: Build with Gradle
