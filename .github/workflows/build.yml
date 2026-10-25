@@ -118,7 +118,11 @@ jobs:
           }
           JSON
           fi
-          echo "${{ secrets.SENTRY_PROPERTIES }}" | base64 --decode > sentry.properties
+          if [ -n "${{ secrets.SENTRY_PROPERTIES }}" ]; then
+            echo "${{ secrets.SENTRY_PROPERTIES }}" | base64 --decode > sentry.properties
+          else
+            printf 'defaults.project=nekogram-build-placeholder\ndefaults.org=nekogram-build-placeholder\n' > sentry.properties
+          fi
 
       - name: Build with Gradle
         run: |
